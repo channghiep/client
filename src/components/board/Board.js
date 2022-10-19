@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import { useRef } from 'react';
-import "../Board.css"
+import "./Board.css"
 
-const Task = [
-    {
-        name: "group1",
-        items: ["a","b","c"]
-    },
-    {
-        name: "group2",
-        items: ["d","e"]
-    }
-]
-export default function () {
-const [list, setList] = useState(Task)
+
+export default function Board (props) {
+// const [list, setList] = useState(Task)
+const list = props.list;
+const setList = props.setList;
 const [dragging, setDragging] = useState(false)
 const dragItem = useRef();
 const dragNode = useRef();
@@ -46,6 +39,7 @@ const handleDragEnter = (e, params) => {
         setList(oldList =>{
             console.log(oldList)
             let newList = JSON.parse(JSON.stringify(oldList))
+            console.log(typeof(newList))
             let selectedItem = newList[currentItem.gI].items[dragItem.current.index]
             // console.log(selectedItem)
             // newList[params.gI].items.splice(dragItem.current.index,1)
@@ -62,9 +56,39 @@ const handleDragEnter = (e, params) => {
     }
 }
 
+const removeTable = (gI) => {
+    setList(oldList => {
+        let newList = JSON.parse(JSON.stringify(oldList))
+        console.log(typeof(newList))
+        newList.splice(gI,1)
+        return newList;
+    })
+}
+
+const removeTask = (gI, index) => {
+    console.log(gI)
+    setList(oldList => {
+        let newList = JSON.parse(JSON.stringify(oldList));
+        console.log(newList[gI]);
+        newList[gI].items.splice(index,1);
+        return newList;
+    })
+}
+
+const createTask = (gI) =>{
+    setList(oldList => {
+        let newList = JSON.parse(JSON.stringify(oldList));
+        console.log(newList[gI].items);
+        newList[gI].items.splice(newList[gI].items.length,0,"new");
+        return newList;
+    })
+}
+
+
+
 return (
     <div className='board'>
-
+        
             {list.map((group, gI)=>(
                 <div 
                     className='dnd-group'
@@ -73,15 +97,20 @@ return (
                 >
                     {group.items.map((item, index)=>(
                         <div 
+                            className='dnd-item' 
                             draggable 
                             onDragStart={(e) => handleDragStart(e,{gI, index})}
                             onDragEnter={dragging?(e) => {handleDragEnter(e,{gI, index})}:null} 
-                            className='dnd-item' 
                             key={index}
                         >
+                            {/* <button onClick={createList}>click</button> */}
                             {item}
+                            
+                            <button onClick={() => removeTask(gI,index)}>remove task</button>
                         </div>
                     ))}
+                    <button onClick={() => createTask(gI)}>create task</button>
+                    <button onClick={() => removeTable(gI)}>Remove</button>
                 </div>
             ))}
 

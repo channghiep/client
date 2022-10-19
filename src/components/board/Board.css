@@ -1,0 +1,22 @@
+.board{
+    display: flex;
+    /* grid-template-columns: auto; */
+    grid-auto-columns: 25%;
+    gap: 20px;
+    background-color: yellow;
+
+}
+.dnd-group{
+    background-color: azure;
+    margin: 20px;
+    min-width: 220px;
+}
+.dnd-item{
+    text-align: center;
+    height: 100px;
+    width: 200px;
+    background-color: blue;
+    color: white;
+    margin: 20px;
+
+}
