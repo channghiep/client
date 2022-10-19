@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useRef } from 'react';
+import Table from '../table/Table';
 import "./Board.css"
 
 
@@ -27,8 +28,12 @@ const handleDragStart = (e, params) =>{
 }
 
 const handleDragEnd = () => {
-    console.log("End Drag")
-    setDragging(false)
+    console.log("End Drag");
+    setDragging(false);
+    dragNode.current.removeEventListener("dragend", handleDragEnd);
+    dragItem.current = null;
+    dragNode.current = null;
+
 }
 
 const handleDragEnter = (e, params) => {
@@ -96,18 +101,27 @@ return (
                     onDragEnter={dragging && !group.items.length?(e) =>{handleDragEnter(e, {gI, index:0})}:null}
                 >
                     {group.items.map((item, index)=>(
-                        <div 
-                            className='dnd-item' 
-                            draggable 
-                            onDragStart={(e) => handleDragStart(e,{gI, index})}
-                            onDragEnter={dragging?(e) => {handleDragEnter(e,{gI, index})}:null} 
-                            key={index}
-                        >
-                            {/* <button onClick={createList}>click</button> */}
-                            {item}
-                            
-                            <button onClick={() => removeTask(gI,index)}>remove task</button>
-                        </div>
+                        // <div 
+                        //     className='dnd-item' 
+                        //     draggable 
+                        //     onDragStart={(e) => handleDragStart(e,{gI, index})}
+                        //     onDragEnter={dragging?(e) => {handleDragEnter(e,{gI, index})}:null} 
+                        //     key={index}
+                        // >
+                        //     {/* <button onClick={createList}>click</button> */}
+                        //     {item}
+                        //     <button onClick={() => setShow(true)}>View</button>
+                        //     <button onClick={() => removeTask(gI,index)}>remove task</button>
+                        // </div>
+                        <Table
+                            gI = {gI}
+                            item = {item}
+                            index = {index}
+                            handleDragStart = {handleDragStart}
+                            handleDragEnter = {handleDragEnter}
+                            removeTask = {removeTask}
+                            dragging = {dragging}
+                        />
                     ))}
                     <button onClick={() => createTask(gI)}>create task</button>
                     <button onClick={() => removeTable(gI)}>Remove</button>
