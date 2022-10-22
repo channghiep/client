@@ -16,18 +16,68 @@ const Task = [
   }
 ]
 
+const Task2 = [
+  
+  {
+    boardName: "project1",
+    active:true,
+    board:[
+      {
+        name: "group1",
+        items: ["a","b","c"]
+      },
+      {
+          name: "group2",
+          items: ["d","e"]
+      } 
+    ]
+  },
+
+  {
+    boardName:"project2",
+    active: false,
+    board:[
+      {
+        name: "group3",
+        items: ["f","g","h"]
+      },
+      {
+          name: "group4",
+          items: ["i","j"]
+      } 
+    ]
+  }
+]
+
 function App() {
 
   const [list, setList] = useState([]);
-  const [selectedTable, setSelectedTable] = useState();
+  const [list2, setList2] = useState([]);
+  const [selectedBoard, setSelectedBoard] = useState();
+  
+    
   useEffect(() => {
-    setTimeout(() =>{
-      setList(Task)
-    },1000)
+    (async () =>{
+      await setTimeout(() =>{
+        // setList(Task)
+        // setList2(Task2[0].board)
+        setList2(Task2)
+        console.log(list2)
+        if(list2.length !=0){
+          console.log("no")
+          setSelectedBoard(list2[0].board)}
+      },1000)
+      
+    })();
+    
   },[])
 
+  // useEffect(() =>{
+    
+  // },[list2])
+  
   const createList = () => {
-    setList(oldList => {
+    setSelectedBoard(oldList => {
           let newList = JSON.parse(JSON.stringify(oldList))
           console.log(typeof(newList))
           const addtionObj = {
@@ -38,14 +88,90 @@ function App() {
           return newList;
     })
   }
-
+  
   // const removeList = (selectedTable) => {
     
   // }
+  // console.log(list2)
+  // console.log(list)
+  // console.log(selectedBoard)
+  const onChangeBoard = (bI) => {
+    console.log(bI)
+    setSelectedBoard(list2[bI].board)
+  }
+
+  const addProject = () =>{
+    setList2(oldList => {
+      let newList = JSON.parse(JSON.stringify(oldList))
+      const addedProject = {
+        boardName: "new project",
+        board:[],
+        active: true
+      };
+      newList.splice(newList.length,0, addedProject)
+      return newList
+    })
+  }
+
+  const removeProject = (bI) => {
+    setList2(oldList => {
+      let newList = JSON.parse(JSON.stringify(oldList))
+      newList[bI].active = false
+
+      return newList;
+    })
+  }
+  console.log(list2)
   return (
     <div>
-      <Board list={list} setList={setList}/>
-      <button onClick={createList} >Add Table</button>
+      <div>DashBoard
+        <button onClick = {addProject}>Add Project</button>
+        {list2 !== undefined ?
+        
+        (<ul>
+          
+          {list2.length > 0 ? (
+          list2.map((boardContainer, bI) =>(
+            boardContainer.active ?
+            
+            <li key={bI} onClick={(e) => onChangeBoard(bI)}>{boardContainer.boardName}
+              <button onClick={(e) => removeProject(bI)}> Remove Project</button>
+            </li>
+            :
+              null
+            
+          ))
+          )
+          :"emty"
+        }
+        </ul>) : "emty"
+      }
+      </div>
+      <div>Main
+        <div>
+          {selectedBoard?
+          <>
+            <Board list={selectedBoard} setList={setSelectedBoard}/>
+            <button onClick={createList} >Add Table</button>
+          </>
+          :null}
+        </div>
+      </div>
+      <div>Deactivated Project
+      {list2.map((boardContainer, bI) =>(
+            !boardContainer.active ?
+            
+            <li key={bI}>{boardContainer.boardName}
+            <button>Activate project</button>
+            </li>
+            // <button onClick={(e) => removeProject(bI)}> Remove Project</button>
+            :
+              null
+            
+          ))}
+      </div>
+
+
     </div>
   );
 }

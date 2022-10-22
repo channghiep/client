@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import Task from '../board/task/Task';
+import Task from './task/Task';
 
 export default function Table(props) {
     const [showModal, setShowModal] = useState(false);
@@ -11,7 +11,8 @@ export default function Table(props) {
     const handleDragEnter = props.handleDragEnter;
     const removeTask = props.removeTask;
     const dragging = props.dragging;
-    console.log(item)
+    const setList = props.setList;
+
     return (
         <div 
             className='dnd-item' 
@@ -26,6 +27,9 @@ export default function Table(props) {
                 <Task
                     item = {item}
                     setShowModal = {setShowModal}
+                    setList = {setList}
+                    gI = {gI}
+                    index = {index}
                 /> 
                 : 
                 <p>No hello</p>}

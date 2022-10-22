@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useRef } from 'react';
-import Table from '../table/Table';
+import Table from './table/Table';
 import "./Board.css"
 
 
 export default function Board (props) {
 // const [list, setList] = useState(Task)
 const list = props.list;
+// const [list, setList] = useState(list1)
+console.log(list)
 const setList = props.setList;
 const [dragging, setDragging] = useState(false)
 const dragItem = useRef();
@@ -121,6 +123,7 @@ return (
                             handleDragEnter = {handleDragEnter}
                             removeTask = {removeTask}
                             dragging = {dragging}
+                            setList = {setList}
                         />
                     ))}
                     <button onClick={() => createTask(gI)}>create task</button>
