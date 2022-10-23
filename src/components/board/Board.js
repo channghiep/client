@@ -6,6 +6,7 @@ import "./Board.css"
 
 export default function Board (props) {
 // const [list, setList] = useState(Task)
+
 const list = props.list;
 // const [list, setList] = useState(list1)
 console.log(list)
@@ -130,7 +131,7 @@ return (
                     <button onClick={() => removeTable(gI)}>Remove</button>
                 </div>
             ))}
-
+        <div className="create-list" onClick={() => {props.createList()}}>CreateList</div>
     </div>
 )
 }

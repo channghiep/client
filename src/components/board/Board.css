@@ -1,9 +1,8 @@
 .board{
     display: flex;
-    /* grid-template-columns: auto; */
     grid-auto-columns: 25%;
     gap: 20px;
-    background-color: yellow;
+    height: auto;
 
 }
 .dnd-group{
