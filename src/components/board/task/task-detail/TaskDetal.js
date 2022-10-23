@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import "./Task.css"
+import "./TaskDetail.css"
 
 export default function Task(props) {
   const [taskDescription, setTaskDescription] = useState(props.item)

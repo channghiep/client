@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import Task from './task/Task';
+import TaskDetail from './task-detail/TaskDetal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPenToSquare} from '@fortawesome/free-solid-svg-icons'
@@ -15,23 +15,27 @@ export default function Table(props) {
     const removeTask = props.removeTask;
     const dragging = props.dragging;
     const setList = props.setList;
-
+    console.log(showModal)
     return (
         <div 
             className='dnd-item' 
             draggable 
             onDragStart={(e) => handleDragStart(e,{gI, index})}
             onDragEnter={dragging?(e) => {handleDragEnter(e,{gI, index})}:null} 
-            onClick={() => setShowModal(true)}
+            
             key={index}
         >
             <p>
                 {item}
             </p>
-            <FontAwesomeIcon icon={faPenToSquare} />
+            <FontAwesomeIcon 
+                className="dnd-item__pen" 
+                icon={faPenToSquare} 
+                onClick={() => setShowModal(true)}
+            />
             
             {showModal ? 
-                <Task
+                <TaskDetail
                     item = {item}
                     setShowModal = {setShowModal}
                     setList = {setList}

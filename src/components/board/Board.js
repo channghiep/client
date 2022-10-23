@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRef } from 'react';
-import Table from './table/Table';
+import Table from './table/Task';
 import "./Board.css"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -99,50 +99,50 @@ const createTask = (gI) =>{
 
 
 return (
-    <div className='board'>
-        
-            {list.map((group, gI)=>(
-                <div 
-                    className='dnd-group'
-                    key={gI}
-                    onDragEnter={dragging && !group.items.length?(e) =>{handleDragEnter(e, {gI, index:0})}:null}
-                >
-                    <div className="dnd-group__header">
-                        <p>List Name</p>
-                        <FontAwesomeIcon 
-                            onClick={() => removeTable(gI)}
-                            icon={faEllipsis} 
-                        />
+    <div className='board'>       
+        {list.map((group, gI)=>(
+            <div 
+                className='dnd-group'
+                key={gI}
+                onDragEnter={dragging && !group.items.length?(e) =>{handleDragEnter(e, {gI, index:0})}:null}
+            >
+                <div className="dnd-group__header">
+                    <p>List Name</p>
+                    <FontAwesomeIcon 
+                        className='header__dots'
+                        onClick={() => removeTable(gI)}
+                        icon={faEllipsis} 
+                    />
 
-                    </div>
-                    {group.items.map((item, index)=>(
-                        // <div 
-                        //     className='dnd-item' 
-                        //     draggable 
-                        //     onDragStart={(e) => handleDragStart(e,{gI, index})}
-                        //     onDragEnter={dragging?(e) => {handleDragEnter(e,{gI, index})}:null} 
-                        //     key={index}
-                        // >
-                        //     {/* <button onClick={createList}>click</button> */}
-                        //     {item}
-                        //     <button onClick={() => setShow(true)}>View</button>
-                        //     <button onClick={() => removeTask(gI,index)}>remove task</button>
-                        // </div>
-                        <Table
-                            gI = {gI}
-                            item = {item}
-                            index = {index}
-                            handleDragStart = {handleDragStart}
-                            handleDragEnter = {handleDragEnter}
-                            removeTask = {removeTask}
-                            dragging = {dragging}
-                            setList = {setList}
-                        />
-                    ))}
-                    <div className='dnd-group__create-task' onClick={() => createTask(gI)}>+ &nbsp; Add a task</div>
                 </div>
-            ))}
-        <div className="create-list" onClick={() => {props.createList()}}>CreateList</div>
+                {group.items.map((item, index)=>(
+                    // <div 
+                    //     className='dnd-item' 
+                    //     draggable 
+                    //     onDragStart={(e) => handleDragStart(e,{gI, index})}
+                    //     onDragEnter={dragging?(e) => {handleDragEnter(e,{gI, index})}:null} 
+                    //     key={index}
+                    // >
+                    //     {/* <button onClick={createList}>click</button> */}
+                    //     {item}
+                    //     <button onClick={() => setShow(true)}>View</button>
+                    //     <button onClick={() => removeTask(gI,index)}>remove task</button>
+                    // </div>
+                    <Table
+                        gI = {gI}
+                        item = {item}
+                        index = {index}
+                        handleDragStart = {handleDragStart}
+                        handleDragEnter = {handleDragEnter}
+                        removeTask = {removeTask}
+                        dragging = {dragging}
+                        setList = {setList}
+                    />
+                ))}
+                <div className='dnd-group__create-task' onClick={() => createTask(gI)}>+ &nbsp; Add a task</div>
+            </div>
+        ))}
+        <div className="board__create-list" onClick={() => {props.createList()}}>+ &nbsp;Add another list</div>
     </div>
 )
 }
