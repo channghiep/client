@@ -1,15 +1,16 @@
 .kanban__inner{
   display: grid;
   grid-template-columns: 20% 80%;
-  background-image: url("../assets/background.jpg");
+  background-image: url("../assets/background9.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;;
+  /* background-position: top -400px right; */
+  height: 100vh;
   color: white;
 }
 .kanban__dashboard{
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.5);
 }
 .kanban__main-content{
-  background-color: rgba(0,0,0,.4);
+  background-color: rgba(0,0,0,.1);
 }

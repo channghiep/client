@@ -3,6 +3,10 @@ import { useRef } from 'react';
 import Table from './table/Table';
 import "./Board.css"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faelli } from '@fortawesome/free-regular-svg-icons'
+import {faEllipsis} from '@fortawesome/free-solid-svg-icons'
+
 
 export default function Board (props) {
 // const [list, setList] = useState(Task)
@@ -103,6 +107,14 @@ return (
                     key={gI}
                     onDragEnter={dragging && !group.items.length?(e) =>{handleDragEnter(e, {gI, index:0})}:null}
                 >
+                    <div className="dnd-group__header">
+                        <p>List Name</p>
+                        <FontAwesomeIcon 
+                            onClick={() => removeTable(gI)}
+                            icon={faEllipsis} 
+                        />
+
+                    </div>
                     {group.items.map((item, index)=>(
                         // <div 
                         //     className='dnd-item' 
@@ -127,8 +139,7 @@ return (
                             setList = {setList}
                         />
                     ))}
-                    <button onClick={() => createTask(gI)}>create task</button>
-                    <button onClick={() => removeTable(gI)}>Remove</button>
+                    <div className='dnd-group__create-task' onClick={() => createTask(gI)}>+ &nbsp; Add a task</div>
                 </div>
             ))}
         <div className="create-list" onClick={() => {props.createList()}}>CreateList</div>

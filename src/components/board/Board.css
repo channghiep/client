@@ -1,21 +1,110 @@
+/* @import url('https://css.gg/more.css'); */
 .board{
-    display: flex;
-    grid-auto-columns: 25%;
-    gap: 20px;
-    height: auto;
+    display: grid;
+    grid-gap: 50px;
+    grid-template-columns: 250px;
+    grid-auto-flow: column;
+    grid-auto-columns: 250px;
+    /* This will make grid item change height base on the content */
+    align-items: flex-start;
+    /* ///////////////////////////////// */
+    /* min-height: 100px; */
+    overflow: hidden;
+    margin: 50px;
+    color: #172b4d;
 
 }
 .dnd-group{
-    background-color: azure;
+    /* background-color: azure; */
+    /* background-color: #ebecf0;
     margin: 20px;
-    min-width: 220px;
+    min-width: 250px; */
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: minmax(min-content, max-content);
+    gap: 10px;
+    width: 250px;
+    min-height: 100px;
+    padding: 10px 20px 10px 20px;
+    background: #ebecf0;
+    border-radius: 0.4em;
+    box-shadow: 0.3em 0.3em 0.7em #00000015;
+    /* transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
+ /* border: rgb(250, 250, 250) 0.2em solid; */
 }
-.dnd-item{
-    text-align: center;
-    height: 100px;
-    width: 200px;
-    background-color: blue;
-    color: white;
-    margin: 20px;
+.dnd-group__header{
+    display: grid;
+    grid-template-columns: 85% 15%;
+}
+.dnd-group__header p{
+    margin: 0;
+    padding: 10px;
+}
+.dnd-group__header>:last-child{
+    justify-self: end;
+    padding: 10px;
+}
+.dnd-group__header>:last-child:hover{
+    /* padding: 10px; */
+    background-color: #D3D3D3;
+    border-radius: 3px;
+    color: green;
+}
+.dnd-group__create-task{
+    padding: 10px;
+    
+}
+.dnd-group__create-task:hover{
+    background-color:#D3D3D3;
+    border-radius: 2px;
 
+}
+.dnd-item {
+    height: 40px;
+    background-color: var(--ds-surface-raised,#fff);
+    border-radius: 3px;
+    box-shadow: var(--ds-shadow-raised,0 1px 0 #091e4240);
+    cursor: pointer;
+    /* display: block; */
+    margin-bottom: 3px;
+    max-width: 300px;
+    min-height: 20px;
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 80% 20%;
+    justify-content: center;
+    align-items: center;
+}
+.dnd-item p{
+    flex-grow: 1;
+    /* margin-left: 10px; */
+    margin: 0;
+    padding-left: 10px;
+}
+.dnd-item>:last-child{
+    display: none;
+    
+}
+.dnd-item:hover{   
+    background: #F8F8F8;
+}
+.dnd-item:hover p{
+    /* flex-grow: .75; */
+    /* margin-left: 10px; */
+    padding-left: 10px;
+}
+.dnd-item:hover >:last-child{
+    display: block;
+    /* flex-grow: .25; */
+    justify-self: end;
+    margin-right: 12px;
+}
+.dnd-item:hover >:last-child:hover{
+    display: block;
+    /* flex-grow: .25; */
+    margin-right: 2px;
+    padding: 10px 10px 10px 10px;
+    background-color:#D3D3D3;
+    border-radius: 2px;
 }

@@ -2,6 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import Task from './task/Task';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+
 export default function Table(props) {
     const [showModal, setShowModal] = useState(false);
     const gI = props.gI;
@@ -19,10 +22,14 @@ export default function Table(props) {
             draggable 
             onDragStart={(e) => handleDragStart(e,{gI, index})}
             onDragEnter={dragging?(e) => {handleDragEnter(e,{gI, index})}:null} 
+            onClick={() => setShowModal(true)}
             key={index}
         >
-            {/* <button onClick={createList}>click</button> */}
-            {item}
+            <p>
+                {item}
+            </p>
+            <FontAwesomeIcon icon={faPenToSquare} />
+            
             {showModal ? 
                 <Task
                     item = {item}
@@ -32,9 +39,10 @@ export default function Table(props) {
                     index = {index}
                 /> 
                 : 
-                <p>No hello</p>}
-            <button onClick={() => setShowModal(true)}>View</button>
-            <button onClick={() => removeTask(gI,index)}>remove task</button>
+                null
+                }
+            {/* <button onClick={() => setShowModal(true)}>View</button> */}
+            {/* <button onClick={() => removeTask(gI,index)}>remove task</button> */}
         </div>
     )
 }
