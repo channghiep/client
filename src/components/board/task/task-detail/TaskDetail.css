@@ -8,12 +8,48 @@
     align-items: center;
     justify-content: center;
 
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.5);
     z-index:1000
 
 }
 .task-modal-inner{
-    background-color: gray;
-    height: 200px;
-    width: 300px;
+    padding: 20px;
+    background-color: #f4f5f7;
+    height: 80%;
+    width: 70%;
+
+    display: grid;
+}
+.modal-inner__header .__wrapper{
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+.modal-inner__header .__track{
+    margin: 0;
+    padding-left: 26px;
+}
+.__legend .__title{
+    margin: 0;
+}
+.__legend .__title span{
+    margin-left: 10px;
+}
+.__legend .__mark{
+    justify-self: end;
+}
+
+/* Stying Descstion */
+.__description__editting{
+    border-radius: 5px;
+    resize: none;
+    width: 90%;
+    background-color: #fff;
+    border: #fff;
+}
+.__description__editting:focus{
+    border: #366da1;
+}
+.__editing__conf{
+    display:flex;
+    gap: 20px;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRef } from 'react';
-import Table from './table/Task';
+import Task from './task/Task';
 import "./Board.css"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -107,7 +107,7 @@ return (
                 onDragEnter={dragging && !group.items.length?(e) =>{handleDragEnter(e, {gI, index:0})}:null}
             >
                 <div className="dnd-group__header">
-                    <p>List Name</p>
+                    <p>{group.name}</p>
                     <FontAwesomeIcon 
                         className='header__dots'
                         onClick={() => removeTable(gI)}
@@ -128,8 +128,9 @@ return (
                     //     <button onClick={() => setShow(true)}>View</button>
                     //     <button onClick={() => removeTask(gI,index)}>remove task</button>
                     // </div>
-                    <Table
+                    <Task
                         gI = {gI}
+                        gName = {group.name}
                         item = {item}
                         index = {index}
                         handleDragStart = {handleDragStart}

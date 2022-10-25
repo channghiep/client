@@ -7,14 +7,8 @@ import {faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 
 export default function Table(props) {
     const [showModal, setShowModal] = useState(false);
-    const gI = props.gI;
-    const item = props.item;
-    const index = props.index;
-    const handleDragStart = props.handleDragStart;
-    const handleDragEnter = props.handleDragEnter;
-    const removeTask = props.removeTask;
-    const dragging = props.dragging;
-    const setList = props.setList;
+    const {gI,gName,item,index,handleDragStart,handleDragEnter,dragging,removeTask,setList} = props
+
     console.log(showModal)
     return (
         <div 
@@ -25,7 +19,7 @@ export default function Table(props) {
             
             key={index}
         >
-            <p>
+            <p className='dnd-item__title'>
                 {item}
             </p>
             <FontAwesomeIcon 
@@ -36,6 +30,7 @@ export default function Table(props) {
             
             {showModal ? 
                 <TaskDetail
+                    gName = {gName}
                     item = {item}
                     setShowModal = {setShowModal}
                     setList = {setList}
