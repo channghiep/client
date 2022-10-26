@@ -47,7 +47,11 @@
     border: #fff;
 }
 .__description__editting:focus{
-    border: #366da1;
+    outline:none!important;
+}
+.__description:hover{
+    background-color: #D3D3D3;
+    /* color: #fff; */
 }
 .__editing__conf{
     display:flex;

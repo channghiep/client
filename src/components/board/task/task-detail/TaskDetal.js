@@ -6,12 +6,12 @@ import {faWindowMaximize, faList, faComment, faXmark} from '@fortawesome/free-so
 
 export default function Task(props) {
   const {gI, gName, index, item, setList } = props
-  const [taskDescription, setTaskDescription] = useState("a")
+  const [taskDescription, setTaskDescription] = useState(item)
   const [editting, setEditing] = useState(false)
   // const setList = props.setList;
   // const gI = props.gI;
   // const index = props.index;
-  console.log(taskDescription.length)
+  console.log(taskDescription)
   const saveEditedTask = () => {
     setList(oldList => {
       let newList = JSON.parse(JSON.stringify(oldList));
@@ -46,21 +46,22 @@ export default function Task(props) {
           </div>
           <p className='__track'>in table {gName}</p>
         </div>
-        <div className="model-inner__description __legend">
-          <p className='__title'>
-            <FontAwesomeIcon icon={faList} />
-            <span>
-              Description
-            </span>
-          </p>
+        <div className="model-inner__description ">
+          <div className='__legend'>
+            <p className='__title'>
+              <FontAwesomeIcon icon={faList} />
+              <span>
+                Description
+              </span>
+            </p>
+          </div>
           {editting ?
           (<>
             <textarea 
               className='__description__editting' 
-              value= {taskDescription}
               placeholder="Write something ..."
               onChange={(e) => onChangeDescription(e)}
-              ></textarea>
+              >{taskDescription}</textarea>
               <div className='__editing__conf'>
                 <div onClick={() => saveEditedTask()}>Save</div>
                 <div onClick={() => setEditing(false)}>Cancel</div>
@@ -68,19 +69,19 @@ export default function Task(props) {
             </>
           )
           :(
-            <p onClick={() => setEditing(true)}>{taskDescription}</p>
+            <p className='__description' onClick={() => setEditing(true)}>{taskDescription}</p>
           )
-          }
-          
-          
+          }   
         </div>
-        <div className="model-inner__comment __legend">
-          <p className='__title'>
-            <FontAwesomeIcon icon={faComment} />
-            <span>
-              Comment
-            </span>
-          </p>
+        <div className="model-inner__comment ">
+          <div className='__legend'>
+            <p className='__title'>
+              <FontAwesomeIcon icon={faComment} />
+              <span>
+                Comment
+              </span>
+            </p>         
+          </div>
           <p>Write a comment</p>
         </div>
       </div>

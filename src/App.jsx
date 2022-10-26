@@ -87,18 +87,7 @@ function App() {
     setSelectedBoard(list2[bI].board);
   };
 
-  const addProject = () => {
-    setList2((oldList) => {
-      let newList = JSON.parse(JSON.stringify(oldList));
-      const addedProject = {
-        boardName: "new project",
-        board: [],
-        active: true,
-      };
-      newList.splice(newList.length, 0, addedProject);
-      return newList;
-    });
-  };
+  
 
   const removeProject = (bI) => {
     setList2((oldList) => {
@@ -115,6 +104,7 @@ function App() {
         <div className="kanban__dashboard">
           <DashBoard 
             boardList = {list2}
+            setList = {setList2}
             onChangeBoard = {onChangeBoard}
             removeProject = {removeProject}
           />

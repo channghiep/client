@@ -18,10 +18,27 @@ const setList = props.setList;
 const [dragging, setDragging] = useState(false)
 const dragItem = useRef();
 const dragNode = useRef();
+const [addingList, setAddingList] = useState(false)
+const [newAddedList, setAddedNewList] = useState()
 
     // onDragOver = (e) => {
     //     e.preventDefault();
     // }
+
+const createList = () => {
+    setList((oldList) => {
+        let newList = JSON.parse(JSON.stringify(oldList));
+        console.log(typeof newList);
+        const addtionObj = {
+        name: newAddedList,
+        items: [],
+        };
+        newList.splice(newList.length, 0, addtionObj);
+        return newList;
+    });
+    setAddedNewList("")
+    setAddingList(false)
+};
 const handleDragStart = (e, params) =>{
     console.log("Drag start", params)
     // let test = params
@@ -96,7 +113,9 @@ const createTask = (gI) =>{
     })
 }
 
-
+const onAddingList = () => {
+    setAddingList(true)
+}
 
 return (
     <div className='board'>       
@@ -143,7 +162,16 @@ return (
                 <div className='dnd-group__create-task' onClick={() => createTask(gI)}>+ &nbsp; Add a task</div>
             </div>
         ))}
-        <div className="board__create-list" onClick={() => {props.createList()}}>+ &nbsp;Add another list</div>
+        {/* <div className="board__create-list" onClick={() => {props.createList()}}>+ &nbsp;Add another list</div> */}
+        {addingList ?
+            (<div className="board__create-list">
+                <input onChange={(e) => {setAddedNewList(e.target.value)}}/>
+                <div onClick={() => createList()}>Save</div>
+            </div>
+            ) : 
+            (<div className="board__create-list" onClick={() => onAddingList()}>+ &nbsp;Add another list</div>)
+            
+        }
     </div>
 )
 }

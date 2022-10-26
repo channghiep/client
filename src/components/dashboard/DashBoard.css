@@ -1,0 +1,21 @@
+.dashboard__your-board{
+  padding: 10px 20px 10px 20px;
+}
+.your-board__header{
+  display: grid;
+  grid-template-columns: 85% 15%;
+}
+.your-board__header p{
+  margin: 0;
+  padding: 10px;
+}
+.your-board__header .__plus{
+  justify-self: end;
+  padding: 10px;
+}
+.your-board__header .__plus:hover{
+  /* padding: 10px; */
+  background-color: #D3D3D3;
+  border-radius: 3px;
+  color: green;
+}
