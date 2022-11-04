@@ -8,16 +8,6 @@ import DashBoard from "./components/dashboard/DashBoard";
 import MainContent from "./components/main-content/MainContent";
 import "./App.css"
 
-const Task = [
-  {
-    name: "group1",
-    items: ["a", "b", "c"],
-  },
-  {
-    name: "group2",
-    items: ["d", "e"],
-  },
-];
 
 const Task2 = [
   {
