@@ -7,6 +7,7 @@
   /* background-position: top -400px right; */
   height: 100vh;
   color: white;
+  font-family: "Poppins", sans-serif;
 }
 .kanban__dashboard{
   background-color: rgba(0,0,0,0.5);
